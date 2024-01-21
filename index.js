@@ -1,0 +1,4 @@
+//imports inquirer package
+const inquirer = require("inquirer");
+
+const fs = require("fs");
