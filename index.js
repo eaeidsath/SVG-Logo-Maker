@@ -1,9 +1,10 @@
-//imports inquirer package
+//imports inquirer package, shapes classes, fs for writing files
 const inquirer = require("inquirer");
 const { Circle, Square, Triangle } = require("./lib/shapes.js");
 const fs = require("fs");
 const shapesList = ["Circle", "Square", "Triangle"]
 
+//inquirer prompt wrapped in a function
 function runGenerator() {
     inquirer
   .prompt([
@@ -33,12 +34,14 @@ function runGenerator() {
 
     const { textContent, textColor, shape, shapeFill } = data;
 
+    //checks if text is 3 characters or less
     if (textContent.length > 3) {
         console.log("Text must be 3 characters or less.");
         runGenerator();
         return
     }
 
+    //if loop to generate the correct shape
     if(shape === "Circle") {
         const circle = new Circle();
         circle.setShapeFill(shapeFill);
@@ -59,10 +62,12 @@ function runGenerator() {
         var logo = triangle.render()
     }
 
+    //writes the svg data to the new file
     fs.writeFile('logo.svg', logo, (err) =>
       err ? console.log(err) : console.log('Generated logo.svg')
     );
 });
 }
 
+//invoke function to run generator
 runGenerator();
